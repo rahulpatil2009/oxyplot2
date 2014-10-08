@@ -150,6 +150,11 @@ namespace OxyPlot.Wpf
         }
 
         /// <summary>
+        /// Notifies the client apps that chart/plot is redrawn
+        /// </summary>
+        public event EventHandler ContentRerendered;
+
+        /// <summary>
         /// Gets the annotations.
         /// </summary>
         /// <value>The annotations.</value>
@@ -1103,6 +1108,11 @@ namespace OxyPlot.Wpf
                 {
                     ((IPlotModel)this.ActualModel).Render(this.renderContext, this.canvas.ActualWidth, this.canvas.ActualHeight);
                 }
+            }
+
+            if (this.ContentRerendered != null)
+            {
+                this.ContentRerendered(this, EventArgs.Empty);
             }
         }
     }
